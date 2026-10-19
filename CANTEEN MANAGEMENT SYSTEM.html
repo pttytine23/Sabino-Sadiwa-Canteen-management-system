@@ -1,0 +1,1251 @@
+<html>
+<head>
+  <title>Kapitolyo High School Canteen System</title>
+  <style>
+    :root {
+      --br: #3f1a0e;
+      --cr: #f4f3d6;
+      --tan: #b08968;
+      --sd: #d9ccc4;
+      --bg: #fff;
+      color-scheme: light;
+    }
+
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Inter, Arial, sans-serif;
+    }
+
+
+    body {
+      background: var(--cr);
+      color: #1b0d07;
+      font-size: 13px;
+    }
+
+
+    button {
+      cursor: pointer;
+      border: 0;
+      font-size: 12px;
+    }
+
+
+    /* ===== LOGIN LAYOUT ===== */
+    #login {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+
+    /* Left Side Gradient Screen */
+    #login .l {
+    flex: 1;
+    background: url('kapitolyo.jpg') center / contain no-repeat,
+              linear-gradient(#9cc3e6, #c9b9a4 60%, #2c4766);
+    color: #ffffff;
+    padding: 24px;
+    font-family: serif;
+    font-size: 18px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+     }
+
+
+    #login .l .top-title {
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      opacity: 0.95;
+    }
+
+
+    #login .l .center-banner {
+      position: absolute;
+      top: 50%;
+      left: 10%;
+      transform: translateY(-50%);
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+
+
+    /* Right Side Form Panel */
+    #login .r {
+      flex: 1;
+      background-color: var(--cr);
+      padding: 80px 100px;
+      font-family: serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+
+    #login h1 {
+      font: 32px serif;
+      color: var(--br);
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+
+    #login h2 {
+      font: 22px serif;
+      color: var(--br);
+      margin-bottom: 8px;
+    }
+
+
+    #login p {
+      font-family: sans-serif;
+      color: #555;
+      font-size: 13px;
+      margin-bottom: 30px;
+    }
+
+
+    #login form {
+      width: 100%;
+      max-width: 320px;
+      font-family: sans-serif;
+    }
+
+
+    #login label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+      color: #333;
+    }
+
+
+    #login input[type="text"],
+    #login input[type="password"] {
+      width: 100%;
+      height: 40px;
+      border: 0;
+      border-radius: 6px;
+      padding: 0 12px;
+      margin-bottom: 16px;
+      background: #ffffff;
+      font-size: 13px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      outline: none;
+    }
+
+
+    .btn {
+      background: var(--br);
+      color: #ffffff;
+      border-radius: 6px;
+      padding: 12px;
+      width: 100%;
+      font-weight: 600;
+      font-size: 13px;
+      transition: background-color 0.2s;
+    }
+
+
+    .btn:hover {
+      background: #2a1109;
+    }
+
+
+    /* ===== MAIN APPLICATION ===== */
+    #app {
+      display: none;
+      min-height: 100vh;
+    }
+
+
+    aside {
+      width: 190px;
+      background: var(--br);
+      color: #fff;
+      padding: 12px;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+    }
+
+
+    aside .u {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+
+    aside .u span {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #d8c7f5;
+    }
+
+
+    aside h4 {
+      margin: 50px 0 12px 6px;
+    }
+
+
+    aside .n {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: var(--cr);
+      color: var(--br);
+      font-weight: 700;
+      padding: 14px 12px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+
+    aside .n.on {
+      outline: 2px solid #8b5cf6;
+    }
+
+
+    main {
+      margin-left: 190px;
+      flex: 1;
+    }
+ header {
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 20px;
+    }
+
+
+    header h1 {
+      font-size: 26px;
+    }
+
+
+    header p {
+      font-size: 15px;
+    }
+
+
+    .date {
+      background: var(--cr);
+      border-radius: 20px;
+      padding: 10px 18px;
+      font-size: 16px;
+    }
+
+
+    .pg {
+      padding: 16px 20px;
+    }
+
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+
+    .c {
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+
+    .c small {
+      color: #555;
+    }
+
+
+    .c b.big {
+      font-size: 20px;
+      display: block;
+      margin-top: 6px;
+    }
+
+
+    .g2 {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+
+    .bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      height: 110px;
+      margin-top: 10px;
+    }
+
+
+    .bars i {
+      flex: 1;
+      background: var(--sd);
+      display: block;
+    }
+
+
+    .bars i.m {
+      background: var(--br);
+    }
+
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+
+    th {
+      background: var(--cr);
+      text-align: left;
+      padding: 7px;
+      font-size: 10px;
+    }
+
+
+    td {
+      padding: 8px 7px;
+      border-bottom: 1px solid #eee;
+      font-size: 11px;
+    }
+
+
+    tr.sel td {
+      background: #fff3e0;
+    }
+
+
+    .pill {
+      padding: 2px 9px;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+
+    .PAID {
+      background: #176b2e;
+    }
+
+
+    .REFUNDED,
+    .CRITICAL,
+    .REORDER {
+      background: #d41f1f;
+    }
+
+
+    .LOW {
+      background: #f59a3a;
+    }
+
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 12px;
+    }
+
+
+    .row label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 0;
+      cursor: pointer;
+    }
+
+
+    .row a {
+      color: #2563eb;
+      text-decoration: underline;
+    }
+
+
+    .pos {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 20px;
+    }
+
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin: 10px 0;
+      align-items: center;
+    }
+
+
+    .tabs button {
+      background: #fff;
+      border: 1px solid #666;
+      border-radius: 6px;
+      padding: 5px 10px;
+    }
+
+
+    .tabs button.on {
+      background: #222;
+      color: #fff;
+    }
+
+
+    .tabs input,
+    .f input,
+    .f select {
+      border: 0;
+      border-radius: 16px;
+      background: #e9e4f3;
+      padding: 7px 12px;
+    }
+
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+
+    .it {
+      background: #fff;
+      border: 1px solid #f0e6ff;
+      border-radius: 18px;
+      padding: 14px;
+      text-align: left;
+    }
+
+
+    .it.sel {
+      outline: 3px solid #1e90ff;
+    }
+
+
+    .it .img-box {
+      width: 100%;
+      height: 90px;
+      margin-bottom: 8px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    .it .img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+
+    .it b {
+      float: right;
+      font-size: 14px;
+    }
+
+
+    .it .add {
+      float: right;
+      border: 1px solid #000;
+      background: #fff;
+      width: 22px;
+      height: 22px;
+      line-height: 18px;
+      padding: 0;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+
+    .co h3 {
+      font: 18px serif;
+      display: flex;
+      justify-content: space-between;
+    }
+
+
+    .who {
+      display: flex;
+      gap: 10px;
+      margin: 8px 0;
+    }
+
+
+    .who button {
+      flex: 1;
+      background: #5a2a1a;
+      color: #fff;
+      padding: 8px;
+      border-radius: 5px;
+    }
+
+
+    .who button.on {
+      background: #1f0a04;
+    }
+
+
+    .ci {
+      background: #efecc8;
+      border-radius: 5px;
+      padding: 7px 9px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 3px #0003;
+      font-size: 11px;
+    }
+
+
+    .ci .q button {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #222;
+      color: #fff;
+      padding: 0;
+    }
+
+
+    .ci .d {
+      background: none;
+      float: right;
+      padding: 0;
+    }
+
+
+    .pay {
+      display: flex;
+      gap: 12px;
+      margin-top: 14px;
+   }
+
+
+    .pay button {
+      flex: 1;
+      background: #fff;
+      border: 1px solid #000;
+      border-radius: 5px;
+      padding: 8px;
+    }
+
+
+    .pay button.on {
+      outline: 2px solid var(--br);
+    }
+
+
+    .f {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+
+    .tan {
+      background: var(--tan);
+      color: #fff;
+      border-radius: 6px;
+      padding: 9px;
+      width: 100%;
+      font-weight: 700;
+    }
+
+
+    .act button {
+      background: var(--tan);
+      color: #fff;
+      border-radius: 4px;
+      padding: 3px 7px;
+      margin-right: 3px;
+    }
+
+
+    .inv {
+      display: grid;
+      grid-template-columns: 1fr 250px;
+      gap: 16px;
+    }
+
+
+    .side {
+      background: var(--br);
+      color: #fff;
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+
+    .side .row {
+      border-bottom: 1px solid #fff3;
+      font-size: 12px;
+    }
+
+
+    .tt {
+      display: inline-flex;
+      background: var(--tan);
+      border-radius: 10px;
+      padding: 10px;
+      gap: 14px;
+      color: #fff;
+    }
+
+
+    .tt button {
+      background: none;
+      color: #fff;
+    }
+
+
+    .tt button.on {
+      background: #ddd;
+      color: #000;
+      border-radius: 5px;
+      padding: 4px 8px;
+    }
+
+  </style>
+</head>
+<body>
+
+
+  <!-- LOGIN SCREEN -->
+  <div id="login">
+    <div class="l">
+    </div>
+
+
+    <div class="r">
+      <h1>CANTEEN ADMINISTRATION</h1>
+      <h2>Welcome Back!</h2>
+      <p>Sign in to manage today's service, stock, and canteen records.</p>
+
+
+      <form onsubmit="return doLogin()">
+        <label for="em">Email</label>
+        <input type="text" id="em" value="christinekyutt@gmail.com" placeholder="Enter email">
+
+
+        <label for="pw">Password</label>
+        <input type="password" id="pw" value="admin123" placeholder="••••••••">
+
+
+        <div class="row">
+          <label><input type="checkbox" checked> Remember me</label>
+          <a href="#" onclick="alert('Demo password: admin123'); return false;">Forgot password?</a>
+        </div>
+
+
+        <button type="submit" class="btn">Sign In</button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- MAIN APP CONTAINER -->
+  <div id="app">
+    <aside>
+      <div class="u">
+        <span></span>
+        <div>
+          Kapitolyo High School<br>
+          <small style="font-family:serif;font-weight:400">CANTEEN SYSTEM</small>
+        </div>
+      </div>
+      <h4>MANAGEMENT</h4>
+      <div id="nav"></div>
+    </aside>
+
+
+    <main>
+      <header>
+        <div>
+          <h1 id="ht"></h1>
+          <p id="hs"></p>
+        </div>
+        <div style="display:flex;gap:20px;align-items:center">
+          <div class="date">📅 Friday, October 2, 2026</div>
+          <span onclick="go('inv')" style="cursor:pointer">🔔<sup id="bell"></sup></span>
+        </div>
+      </header>
+
+
+      <section class="pg" id="dash"></section>
+      <section class="pg" id="pos"></section>
+      <section class="pg" id="inv"></section>
+      <section class="pg" id="rep"></section>
+    </main>
+  </div>
+
+
+  <script>
+    // ===== DATA ARRAYS =====
+    const users = [{ "email": "christinekyutt@gmail.com", "password": "admin123" }];
+
+
+    let menu = [
+      { "id": 1, "name": "Hotsilog", "cat": "Meals", "price": 49, "stock": 20, "unit": "bowls", "img": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSv9bhRVJ5_-BEU-QsrCy2sFk1PsNjlzh4LhpfTjBSQg5e29hGI" },
+      { "id": 2, "name": "Siomai Rice with Egg", "cat": "Meals", "price": 65, "stock": 20, "unit": "pcs", "img": "https://www.pngkey.com/png/full/852-8520717_heres-why-you-should-eat-like-a-king.png " },
+      { "id": 3, "name": "Tapsilog", "cat": "Meals", "price": 75, "stock": 25, "unit": "pcs", "img": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR9f4zjqpWAPlaQ06k5sCvxrxb2bpyRsYvqJ2falXGYYOlIbiAf" },
+      { "id": 4, "name": "Pastil", "cat": "Meals", "price": 35, "stock": 20, "unit": "bowls", "img": "https://theodehlicious.com/wp-content/uploads/2021/08/Chicken-Pastil-500x500.jpg" },
+      { "id": 5, "name": "Burger Steak with Rice", "cat": "Meals", "price": 70, "stock": 30, "unit": "bowls", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStnzmveREbPZxfd5fiP0Fibi47Dh6NQigUEjA7YQAuV2LPgLlG" },
+      { "id": 6, "name": "Chicken Poppers", "cat": "Meals", "price": 79, "stock": 35, "unit": "pcs", "img": "https://overtimecook.com/wp-content/uploads/2024/12/garlic-poppers-540x720.jpg" },
+      { "id": 7, "name": "Baconsilog", "cat": "Meals", "price": 50, "stock": 35, "unit": "pcs", "img": "https://i.pinimg.com/736x/69/1a/15/691a15422bc4f1ab210ff7615db1470e.jpg" },
+      { "id": 8, "name": "Tonkatsu", "cat": "Meals", "price": 80, "stock": 40, "unit": "pcs", "img": "https://media.istockphoto.com/id/501834769/photo/japanese-pork-cutlet-tonkatsu.jpg?s=612x612&w=0&k=20&c=gvH4989OBkcU0dRWe2wvrIJOnHDIKrtCik75VdNKBrU=" },
+      { "id": 9, "name": "Hamsilog", "cat": "Meals", "price": 50, "stock": 15, "unit": "pcs", "img": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR5Pmy0gi0dI4duWm-4EaXKgwzp-FMWmgXLeKBSbPX8lFg4GmaL" },
+      { "id": 10, "name": "Combi", "cat": "Snacks", "price": 10, "stock": 20, "unit": "bowls", "img": "https://foodpanda.dhmedia.io/image/darsktores-ph/food/4800092112782.jpg?height=176" },
+      { "id": 11, "name": "Crossini", "cat": "Snacks", "price": 15, "stock": 20, "unit": "pcs", "img": "https://media.pickaroo.com/media/thumb/product_photo/2024/10/22/5RTSJK8ebGDYUkTm4HUUdX_watermark_400.jpg" },
+      { "id": 12, "name": "Banana Cue", "cat": "Snacks", "price": 25, "stock": 25, "unit": "pcs", "img": "https://cdn.sanity.io/images/f3knbc2s/production/d6f68e9829289c8826f4d70b0f45bd1ae6fca144-2500x1500.jpg?auto=format" },
+      { "id": 13, "name": "Rebisco", "cat": "Snacks", "price": 10, "stock": 20, "unit": "pcs", "img": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTdaspk9qwNNpn9zCrTv4glsB7ic8mhFF4Fn9Pr4RquZuD5i85r" },
+      { "id": 14, "name": "Turon", "cat": "Snacks", "price": 25, "stock": 30, "unit": "bowls", "img": "https://abrahamtours.com/philippines/wp-content/uploads/2023/12/Untitled-design-92.jpg" },
+      { "id": 15, "name": "Egg Sandwich", "cat": "Snacks", "price": 30, "stock": 35, "unit": "pcs", "img": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQRWoPMLt9cHHomO4F6xCk6YgPFd6mKVl6CRAlCLPMZCuy1szVd" },
+      { "id": 16, "name": "Fudgee Barr (choco)", "cat": "Snacks", "price": 10, "stock": 35, "unit": "pcs", "img": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRUMlQkVvmhXx_53ZiQhmRJsYegvmVW6W3QrhofTCvOnKjpxRfY" },
+      { "id": 17, "name": "Graham bar", "cat": "Snacks", "price": 30, "stock": 40, "unit": "pcs", "img": "https://kitchenangel.com.ph/wp-content/uploads/2025/10/image_2025-10-09_131321463.png" },
+      { "id": 18, "name": "Waffle", "cat": "Snacks", "price": 30, "stock": 15, "unit": "pcs", "img": "https://www.jessicagavin.com/wp-content/uploads/2025/02/waffle-recipe-20-1200-500x375.jpg" },
+      { "id": 19, "name": "Delight", "cat": "Drinks", "price": 50, "stock": 20, "unit": "bowls", "img": "https://assets.landers.ph/catalog/product/1/3/130969.jpg" },
+      { "id": 20, "name": "Zest-O", "cat": "Drinks", "price": 15, "stock": 20, "unit": "pcs", "img": "https://down-ph.img.susercontent.com/file/ph-11134207-81zto-mm5gjn40zif948" },
+      { "id": 21, "name": "Bear Brand (sterilized milk)", "cat": "Drinks", "price": 15, "stock": 25, "unit": "pcs", "img": "https://primomart.ph/cdn/shop/files/images_3fd88f37-53a9-44ab-98cf-b09763850cf1_299x168.jpg?v=1754887956" },
+      { "id": 22, "name": "Water", "cat": "Drinks", "price": 20, "stock": 20, "unit": "bowls", "img": "https://ph-test-11.slatic.net/p/e0c102f2006926936d60ac9f1eac58c2.jpg" },
+      { "id": 23, "name": "C2", "cat": "Drinks", "price": 18, "stock": 30, "unit": "bowls", "img": "https://www.shopfreshandgreen.com/cdn/shop/files/Screenshot_20-3-2025_192756_ever.ph_300x300.jpg?v=1743776598" },
+      { "id": 23, "name": "Dutch Mill", "cat": "Drinks", "price": 20, "stock": 35, "unit": "bowls", "img": "https://i.ytimg.com/vi/KWPqzxGBi2Q/mqdefault.jpg" },
+      { "id": 25, "name": "Yakult", "cat": "Drinks", "price": 12, "stock": 35, "unit": "pcs", "img": "https://cms.yakult.co.uk/wp-content/uploads/2021/09/image_nocopy.jpg" },
+      { "id": 26, "name": "Chuckie", "cat": "Drinks", "price": 30, "stock": 40, "unit": "pcs", "img": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ7mJPFXdDqe41cduY7-QyYr7-ukSQaOIvZAYtrMAPj1PdKIQEZ" },
+      { "id": 27, "name": "MySip", "cat": "Drinks", "price": 20, "stock": 15, "unit": "pcs", "img": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQwpJVWzIAgrjaHZzkC_GpKtxEuGnhsFzz9yXygGCHX7CkN-4DI" },
+  ];
+
+
+    let inv = [
+      { "code": "ING-001", "name": "Rice, well-milled", "cat": "Dry goods", "qty": 28.5, "unit": "kg", "reorder": 15, "cost": 56 },
+      { "code": "ING-014", "name": "Chicken thigh", "cat": "Protein", "qty": 11, "unit": "kg", "reorder": 8, "cost": 195 },
+      { "code": "ING-022", "name": "Fresh eggs", "cat": "Protein", "qty": 18, "unit": "pcs", "reorder": 30, "cost": 9 },
+      { "code": "ING-031", "name": "Cooking oil", "cat": "Pantry", "qty": 2.5, "unit": "L", "reorder": 6, "cost": 88 },
+      { "code": "PRD-007", "name": "Bread", "cat": "Ready goods", "qty": 24, "unit": "pcs", "reorder": 30, "cost": 6 },
+      { "code": "OKG-12", "name": "Buko juice cups", "cat": "Packaging", "qty": 124, "unit": "pcs", "reorder": 80, "cost": 3.44 },
+      { "code": "ING-044", "name": "Calamansi", "cat": "Produce", "qty": 3.2, "unit": "kg", "reorder": 2, "cost": 90 },
+      { "code": "ING-052", "name": "Rice noodles", "cat": "Dry goods", "qty": 6, "unit": "kg", "reorder": 5, "cost": 85 }
+    ];
+
+
+    let orders = [
+      { "id": "KH-1045", "time": "12:35 PM", "cust": "Student", "items": 5, "total": 255, "status": "REFUNDED" },
+      { "id": "KH-1046", "time": "12:35 PM", "cust": "Student", "items": 3, "total": 95, "status": "PAID" },
+      { "id": "KH-1047", "time": "12:43 PM", "cust": "Faculty", "items": 2, "total": 120, "status": "PAID" },
+      { "id": "KH-1048", "time": "12:46 PM", "cust": "Student", "items": 4, "total": 185, "status": "PAID" }
+    ];
+
+
+    let topSales = [
+      { "name": "Chicken arroz caldo", "amt": 2940 },
+      { "name": "Pancit bihon", "amt": 2485 },
+      { "name": "Tuna sandwich", "amt": 1980 },
+      { "name": "Buko juice", "amt": 1589 }
+    ];
+
+
+    let days = [
+      { "d": "Mon, Sep 28", "s": 14620, "o": 231, "t": 2.8 },
+      { "d": "Tue, Sep 29", "s": 15840, "o": 248, "t": 3.9 },
+      { "d": "Wed, Sep 30", "s": 13910, "o": 217, "t": -4.2 },
+      { "d": "Thu, Oct 1", "s": 16680, "o": 259, "t": 6.1 },
+      { "d": "Fri, Oct 2", "s": 18760, "o": 286, "t": 7.2 }
+    ];
+
+
+    let hourly = [4, 5.5, 3.8, 6.5, 5.2, 7.5, 6.4, 9, 7.2];
+
+
+    let deliveries = [
+      { "m": "OCT", "d": "05", "sup": "Pasig Public Market", "po": "PO-2026-092 • 8 items", "st": "CONFIRMED" },
+      { "m": "OCT", "d": "07", "sup": "Luzon Food Supply", "po": "PO-2026-095 • 5 items", "st": "PENDING" }
+    ];
+
+
+    let cart = [
+      { id: 2, name: "Siomai Rice with Egg", price: 75, qty: 1 },
+      { id: 11, name: "Crossini", price: 15, qty: 2 },
+      { id: 22, name: "Water", price: 20, qty: 1 },
+      { id: 16, name: "Fudgee Barr (choco)", price: 10, qty: 3 },
+      { id: 25, name: "Yakult", price: 12, qty: 3 }
+    ];
+
+
+    let cat = "All", who = "Student", payM = "", cash = 200, q = "", selMenu = null, selInv = null, fq = "", fc = "All categories", fs = "All status", baseSales = 12589, baseServed = 286, note = "";
+
+
+    // ===== HELPER FUNCTIONS =====
+    const $ = s => document.getElementById(s);
+    const P = n => "₱" + Number(n).toLocaleString(undefined, { maximumFractionDigits: 2 });
+    const status = i => i.qty >= i.reorder ? "IN STOCK" : (i.qty < i.reorder * 0.5 ? "CRITICAL" : "LOW STOCK");
+
+
+    const T = {
+      dash: ["DASHBOARD", "Monday operation"],
+      pos: ["POINT OF SALE", "Create and process canteen orders"],
+      inv: ["INVENTORY", "Monitor ingredients, supplies, and reorder levels"],
+      rep: ["REPORTS", "Review canteen performance and finance health"]
+    };
+
+
+    const N = [
+      ["dash", "DASHBOARD"],
+      ["pos", "POINT OF SALE"],
+      ["inv", "INVENTORY"],
+      ["rep", "REPORTS"]
+    ];
+
+
+    // ===== AUTH & NAVIGATION =====
+    function doLogin() {
+      const emailInput = $("em").value.trim();
+      const passwordInput = $("pw").value;
+
+
+      const user = users.find(x => x.email === emailInput && x.password === passwordInput);
+
+
+      if (!user) {
+        alert("Wrong email or password. Please try again.");
+        return false;
+      }
+
+
+      $("login").style.display = "none";
+      $("app").style.display = "flex";
+      go("dash");
+      return false;
+    }
+
+
+    function go(v) {
+      ["dash", "pos", "inv", "rep"].forEach(k => $(k).style.display = k == v ? "block" : "none");
+      $("ht").textContent = T[v][0];
+      $("hs").textContent = T[v][1];
+      $("nav").innerHTML = N.map(n => `<button class="n ${n[0] == v ? "on" : ""}" onclick="go('${n[0]}')">${n[1]}</button>`).join("");
+      $("bell").textContent = inv.filter(i => status(i) != "IN STOCK").length;
+      ({ dash: rDash, pos: rPos, inv: rInv, rep: rRep })[v]();
+    }
+
+
+    // ===== DASHBOARD MODULE =====
+    function rDash() {
+      const paid = orders.filter(o => o.status == "PAID");
+      const extra = paid.filter(o => o.isNew).reduce((a, o) => a + o.total, 0);
+      const sales = baseSales + extra;
+      const served = baseServed + orders.filter(o => o.isNew).length;
+      const low = inv.filter(i => status(i) != "IN STOCK");
+      const mx = Math.max(...hourly);
+      const tops = [...topSales].sort((a, b) => b.amt - a.amt).slice(0, 4);
+
+
+      $("dash").innerHTML = `
+        <div class="cards">
+          <div class="c"><small>Today's sales</small><b class="big">${sales.toLocaleString()} <small>+12.4%</small></b></div>
+          <div class="c"><small>Order served</small><b class="big">${served} <small>+ 31 today</small></b></div>
+          <div class="c"><small>Average order</small><b class="big">${P((sales / served).toFixed(2))}</b></div>
+          <div class="c"><small>Low Stock Item</small><b class="big">${low.length} <small>${low.filter(i => status(i) == "CRITICAL").length} urgent</small></b></div>
+        </div>
+        <div class="g2">
+          <div class="c">
+            <h3>Sale overview</h3><small>Today's gross sales by service period</small><b class="big">${sales.toLocaleString()}</b>
+            <div class="bars">${hourly.map(h => `<i class="${h == mx ? "m" : ""}" style="height:${h / mx * 100}%"></i>`).join("")}</div>
+            <div class="row"><small>7 AM</small><small>9 AM</small><small>11 AM</small><small>1 PM</small><small>3 PM</small></div>
+          </div>
+          <div class="c">
+            <h3>Top-selling items</h3><small>Based on quantity sold today</small>
+            ${tops.map((t, i) => `<div class="row"><span>${i + 1} &nbsp;${t.name}</span><b>${P(t.amt)}</b></div>`).join("")}
+            <a href="#" onclick="go('pos');return false">→ View all items</a>
+          </div>
+        </div>
+        <div class="g2">
+          <div class="c">
+            <div class="row"><h3>Recent orders</h3><a href="#" onclick="alert('Total orders today: '+orders.length);return false">View all →</a></div>
+            <table>
+              <tr><th>ORDER</th><th>TIME</th><th>CUSTOMER</th><th>ITEMS</th><th>TOTAL</th><th>STATUS</th></tr>
+              ${[...orders].reverse().slice(0, 4).map(o => `
+                <tr>
+                  <td>#${o.id}</td>
+                  <td>${o.time}</td>
+                  <td>${o.cust}</td>
+                  <td>${o.items} items</td>
+                  <td>${P(o.total)}</td>
+                  <td><span class="pill ${o.status}" style="cursor:pointer" onclick="toggleRef('${o.id}')">${o.status}</span></td>
+                </tr>`).join("")}
+            </table>
+          </div>
+          <div class="c">
+            <h3>Stock Alerts</h3><small>${low.length} ingredients need attention</small>
+            ${low.slice(0, 3).map(i => `
+              <div class="row">
+                <span>📦 <b>${i.name}</b><br><small>${i.qty}${i.unit} remaining</small></span>
+                <span class="pill ${status(i) == "CRITICAL" ? "REORDER" : "LOW"}">${status(i) == "CRITICAL" ? "REORDER" : "LOWSTOCK"}</span>
+              </div>`).join("")}
+          </div>
+        </div>`;
+    }
+
+
+    function toggleRef(id) {
+      const o = orders.find(x => x.id == id);
+      if (confirm(o.status == "PAID" ? "Refund order #" + id + "?" : "Mark order #" + id + " as PAID again?")) {
+        o.status = o.status == "PAID" ? "REFUNDED" : "PAID";
+        rDash();
+      }
+    }
+
+
+    // ===== POINT OF SALE MODULE =====
+    const total = () => cart.reduce((a, c) => a + c.price * c.qty, 0);
+
+
+    function rPos() {
+      const list = menu.filter(m => (cat == "All" || m.cat == cat) && m.name.toLowerCase().includes(q.toLowerCase()));
+
+
+      $("pos").innerHTML = `
+        <div class="pos">
+          <div>
+            <div class="tabs">
+              <input id="sq" placeholder="🔍 Search menu items" value="${q}" oninput="q=this.value;rPos();$('sq').focus()">
+              ${["All", "Meals", "Snacks", "Drinks", "Add-ons"].map(c => `<button class="${c == cat ? "on" : ""}" onclick="cat='${c}';rPos()">${c}</button>`).join("")}
+            </div>
+            <div class="menu">
+              ${list.map(m => `
+                <div class="it ${selMenu == m.id ? "sel" : ""}" onclick="selMenu=${m.id};rPos()">
+                  <div class="img-box">
+                    <img src="${m.img}" alt="${m.name}" onerror="this.onerror=null;this.parentElement.innerHTML='🍲';">
+                  </div>
+                  <b>${P(m.price)}</b>${m.name}<br>
+                  <small>${m.cat}</small><br><br>
+                  <small>${m.stock}${m.unit}</small>
+                  <button class="add" onclick="event.stopPropagation();addCart(${m.id})">+</button>
+                </div>`).join("")}
+            </div>
+          </div>
+          <div class="co">
+            <h3>Current Order <span style="cursor:pointer" onclick="clearCart()">🗑</span></h3>
+            <div class="who">
+              ${["Student", "Faculty"].map(w => `<button class="${w == who ? "on" : ""}" onclick="who='${w}';rPos()">${w}</button>`).join("")}
+            </div>
+            ${cart.map(c => `
+              <div class="ci">
+                <span>${c.name}</span>
+                <button class="d" onclick="delCart(${c.id})">🗑</button>
+                <div class="row">
+                  <span class="q">
+                    <button onclick="qty(${c.id},-1)">−</button> ${c.qty} <button onclick="qty(${c.id},1)">+</button>
+                  </span>
+                  <b>${P(c.price * c.qty)}</b>
+                </div>
+              </div>`).join("") || "<small>No items yet. Tap + on a menu item.</small>"}
+            <div class="ci" style="cursor:pointer" onclick="note=prompt('Add order note','')||note">📋 ${note || "Add order note"}</div>
+            <div class="row"><span>Cash:</span><b>${P(cash)}</b></div>
+            <div class="row"><span>Total:</span><b>${P(total())}</b></div>
+            <div class="row"><span>Change:</span><b>${P(Math.max(0, cash - total()))}</b></div>
+            <div class="pay">
+              <button class="${payM == "Money" ? "on" : ""}" onclick="setPay('Money')">💵<br>Money</button>
+              <button class="${payM == "GCash" ? "on" : ""}" onclick="setPay('GCash')">📱<br>GCash</button>
+            </div>
+          </div>
+        </div>`;
+    }
+
+
+    function addCart(id) {
+      const m = menu.find(x => x.id == id), c = cart.find(x => x.id == id);
+      if ((c ? c.qty : 0) >= m.stock) return alert("Not enough stock for " + m.name);
+      c ? c.qty++ : cart.push({ id: m.id, name: m.name, price: m.price, qty: 1 });
+      rPos();
+    }
+
+
+    function qty(id, d) {
+      const c = cart.find(x => x.id == id), m = menu.find(x => x.id == id);
+      c.qty += d;
+      if (c.qty > m.stock) {
+        c.qty = m.stock;
+        alert("Not enough stock");
+      }
+      if (c.qty < 1) cart = cart.filter(x => x.id != id);
+      rPos();
+    }
+
+
+    function delCart(id) {
+      if (confirm("Remove this item?")) {
+        cart = cart.filter(x => x.id != id);
+        rPos();
+      }
+    }
+
+
+    function clearCart() {
+      if (cart.length && confirm("Clear the whole order?")) {
+        cart = [];
+        cash = 0;
+        payM = "";
+        note = "";
+        rPos();
+      }
+    }
+
+
+    function setPay(m) {
+      payM = m;
+      if (m == "GCash") {
+        cash = total();
+      } else {
+        const v = parseFloat(prompt("Cash received (₱):", cash || total()));
+        if (!isNaN(v)) cash = v;
+      }
+      rPos();
+      checkout();
+    }
+
+
+    function checkout() {
+      if (!cart.length) return alert("Add items first.");
+      if (!payM) return alert("Select Money or GCash.");
+      if (cash < total()) return alert("Cash is not enough. Short by " + P(total() - cash));
+
+
+      const n = orders.length + 1045;
+      const d = new Date();
+      const t = d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+
+      orders.push({
+        id: "KH-" + n,
+        time: t,
+        cust: who,
+        items: cart.reduce((a, c) => a + c.qty, 0),
+        total: total(),
+        status: "PAID",
+        isNew: true
+      });
+
+
+      cart.forEach(c => {
+        menu.find(m => m.id == c.id).stock -= c.qty;
+        const ts = topSales.find(s => s.name == c.name);
+        ts ? ts.amt += c.price * c.qty : topSales.push({ name: c.name, amt: c.price * c.qty });
+      });
+
+
+      alert("Order #KH-" + n + " paid via " + payM + ". Change: " + P(cash - total()));
+      cart = [];
+      cash = 0;
+      payM = "";
+      note = "";
+      rPos();
+    }
+
+
+    // ===== INVENTORY MODULE =====
+    function rInv() {
+      const rows = inv.filter(i => i.name.toLowerCase().includes(fq.toLowerCase()) && (fc == "All categories" || i.cat == fc) && (fs == "All status" || status(i) == fs));
+      const cats = [...new Set(inv.map(i => i.cat))];
+      const ok = inv.filter(i => status(i) == "IN STOCK").length;
+      const lo = inv.filter(i => status(i) == "LOW STOCK").length;
+      const cr = inv.filter(i => status(i) == "CRITICAL").length;
+      const re = inv.filter(i => status(i) != "IN STOCK");
+
+
+      $("inv").innerHTML = `
+        <div class="cards">
+          <div class="c"><small>Inventory Value</small><b class="big">${P(inv.reduce((a, i) => a + i.qty * i.cost, 0).toFixed(0))} <small>${inv.length} items</small></b></div>
+          <div class="c"><small>In stock</small><b class="big">${ok} <small>${Math.round(ok / inv.length * 100)}% healthy</small></b></div>
+          <div class="c"><small>Low stock</small><b class="big">${lo} <small>Review today</small></b></div>
+          <div class="c"><small>Critical</small><b class="big">${cr} <small>Reorder now</small></b></div>
+        </div>
+        <div class="inv">
+          <div class="c">
+            <div class="f">
+              <input style="background:var(--tan);color:#fff" placeholder="Search Ingredients 🔍" value="${fq}" oninput="fq=this.value;rInv();this.focus()" id="iq">
+              <select onchange="fc=this.value;rInv()"><option>All categories</option>${cats.map(c => `<option ${c == fc ? "selected" : ""}>${c}</option>`).join("")}</select>
+              <select onchange="fs=this.value;rInv()">${["All status", "IN STOCK", "LOW STOCK", "CRITICAL"].map(s => `<option ${s == fs ? "selected" : ""}>${s}</option>`).join("")}</select>
+            </div>
+            <table style="margin-top:10px">
+              <tr><th>ITEM</th><th>CATEGORY</th><th>ON HAND</th><th>REORDER AT</th><th>STOCK VALUE</th><th>STATUS</th></tr>
+              ${rows.map(i => `
+                <tr class="${selInv == i.code ? "sel" : ""}" onclick="selInv='${i.code}';document.querySelectorAll('#inv tr').forEach(r=>r.classList.remove('sel'));this.classList.add('sel')" ondblclick="editInv('${i.code}')">
+                  <td><b>${i.name}</b><br><small>${i.code}</small></td>
+                  <td>${i.cat}</td>
+                  <td><b>${i.qty}${i.unit}</b></td>
+                  <td>${i.reorder}${i.unit}</td>
+                  <td>${P((i.qty * i.cost).toFixed(0))}</td>
+                  <td><b>${status(i)}</b></td>
+                </tr>`).join("")}
+            </table>
+            <small>Showing 1-${rows.length} of ${inv.length} inventory items</small>
+          </div>
+          <div>
+            <div class="c">
+              <div class="row"><h3>Reorder list</h3><b>${re.length} items</b></div><small>Suggested for next delivery</small>
+              ${re.map(i => `<div class="row"><span>📦 <b>${i.name}</b><br><small>${i.qty}${i.unit} left</small></span><b>Order ${Math.ceil(i.reorder * 2 - i.qty)}${i.unit}</b></div>`).join("")}
+              <button class="tan" onclick="alert('Purchase list:\\n'+inv.filter(i=>status(i)!='IN STOCK').map(i=>'- '+i.name+': '+Math.ceil(i.reorder*2-i.qty)+' '+i.unit).join('\\n'))">Create purchase list</button>
+            </div>
+            <div class="c" style="margin-top:16px">
+              <h3>Upcoming deliveries</h3><small>Scheduled purchase orders</small>
+              ${deliveries.map(d => `<div class="row"><span><b>${d.m} ${d.d}</b>${d.sup}<br><small>${d.po}</small></span><small>${d.st}</small></div>`).join("")}
+              <button class="tan" onclick="alert('Purchase orders: '+deliveries.map(d=>d.po.split(' ')[0]).join(', '))">View purchase orders</button>
+            </div>
+          </div>
+        </div>`;
+    }
+
+
+    function addInv() {
+      const name = prompt("Item name:");
+      if (!name) return;
+      const cat = prompt("Category:", "Pantry");
+      const qty = parseFloat(prompt("On hand:", "0"));
+      const unit = prompt("Unit (kg, L, pcs):", "pcs");
+      const re = parseFloat(prompt("Reorder at:", "0"));
+      const cost = parseFloat(prompt("Cost per unit (₱):", "0"));
+
+
+      if ([qty, re, cost].some(isNaN)) return alert("Invalid number.");
+      inv.push({ code: "ING-" + String(100 + inv.length), name, cat, qty, unit, reorder: re, cost });
+      alert(name + " added.");
+      rInv();
+    }
+
+
+    function editInv(code) {
+      const i = inv.find(x => x.code == code);
+      const name = prompt("Item name:", i.name);
+      if (!name) return;
+      const qty = parseFloat(prompt("On hand (" + i.unit + "):", i.qty));
+      const re = parseFloat(prompt("Reorder at:", i.reorder));
+
+
+      if (isNaN(qty) || isNaN(re)) return alert("Invalid number.");
+      Object.assign(i, { name, qty, reorder: re });
+      alert(name + " updated.");
+      rInv();
+    }
+
+
+    function delInv(code) {
+      const i = inv.find(x => x.code == code);
+      if (confirm("Delete " + i.name + "?")) {
+        inv = inv.filter(x => x.code != code);
+        alert("Deleted.");
+        rInv();
+      }
+    }
+
+
+    // ===== REPORTS MODULE =====
+    let tab = "Sales";
+    document.addEventListener("keydown", e => {
+      if (e.key == "Delete" && $("inv").style.display == "block" && selInv) delInv(selInv);
+    });
+
+
+    function rRep() {
+      const g = days.reduce((a, d) => a + d.s, 0);
+      const o = days.reduce((a, d) => a + d.o, 0);
+      const cogs = 39106;
+      const opx = 12480;
+      const net = g - cogs - opx;
+      const mx = Math.max(...days.map(d => d.s));
+
+
+      $("rep").innerHTML = `
+        <div class="f" style="justify-content:space-between;margin-bottom:14px">
+          <div class="tt">
+            ${["Sales", "Items", "Inventory", "Expenses"].map(t => `<button class="${t == tab ? "on" : ""}" onclick="tab='${t}';repTab()">${t}</button>`).join("")}
+          </div>
+          <div class="f">
+            <div class="date" style="font-size:12px;padding:8px 12px">Sep 28 - Oct 2, 2026</div>
+            <button class="date" style="font-size:12px" onclick="window.print()">⬇ Export PDF</button>
+          </div>
+        </div>
+        <div class="cards">
+          <div class="c"><small>Weekly sales</small><b class="big">${P(g)} <small>+9.8%</small></b></div>
+          <div class="c"><small>Order served</small><b class="big">${o.toLocaleString()} <small>+104</small></b></div>
+          <div class="c"><small>Gross margin</small><b class="big">51.0% <small>+1.6 pts</small></b></div>
+          <div class="c"><small>Waste rate</small><b class="big">2.3% <small>-0.4 pts</small></b></div>
+        </div>
+        <div class="g2">
+          <div class="c">
+            <h3>Sales trend</h3><small>Gross revenue for the current school week</small><b class="big">${P(g)} <small>${P(Math.round(g / 5))} daily average</small></b>
+            <div class="bars" style="height:130px">
+              ${days.map((d, i) => `<i class="${i == 4 ? "m" : ""}" style="height:${d.s / mx * 100}\%;${i == 4 ? "background:var(--tan)" : ""}" title="${d.d}:${P(d.s)}"></i>`).join("")}
+            </div>
+            <div class="row">${["Mon", "Tues", "Wed", "Thur", "Fri"].map(x => `<small>${x}</small>`).join("")}</div>
+          </div>
+          <div class="c">
+            <h3>Sales by Category</h3><small>Share of weekly revenue</small>
+            ${[["Meals", 48, 38309], ["Snacks", 27, 21549], ["Drinks", 19, 15164], ["Add-ons", 6, 4788]].map(c => `<div class="row"><span>${c[0]} <b>${c[1]}\%</b></span><b>${P(c[2])}</b></div>`).join("")}
+          </div>
+        </div>
+        <div class="g2">
+          <div class="c">
+            <h3>Daily performance</h3><small>Sales, volume, and average ticket</small>
+            <table>
+              <tr><th>DAY</th><th>GROSS SALES</th><th>ORDER</th><th>AVG. TICKET</th><th>VS TARGET</th></tr>
+              ${days.map(d => `
+                <tr>
+                  <td><b>${d.d}</b></td>
+                  <td><b>${P(d.s)}</b></td>
+                  <td>${d.o}</td>
+                  <td>${P((d.s / d.o).toFixed(2))}</td>
+                  <td>${d.t > 0 ? "+" : ""}${d.t}%</td>
+                </tr>`).join("")}
+            </table>
+          </div>
+          <div class="c" style="background:var(--br);color:#fff">
+            <h3>Financial summary</h3><small>Current school week</small>
+            <div class="row"><span>Gross sales</span><b>${P(g)}</b></div>
+            <div class="row"><span>Cost of goods</span><b>-${P(cogs)}</b></div>
+            <div class="row"><span>Operating expenses</span><b>-${P(opx)}</b></div>
+            <hr style="margin: 10px 0; border-color: rgba(255,255,255,0.2);">
+            <div class="row">
+              <b>Net Canteen income<br><small>${(net / g * 100).toFixed(1)}% operating margin</small></b>
+              <b style="font-size:24px">${P(net)}</b>
+            </div>
+            <div class="date" style="color:#000;font-size:11px;margin-top:10px;">ⓘ ${P(8467)} allocated to the student nutrition fund</div>
+          </div>
+        </div>`;
+    }
+
+
+    function repTab() {
+      if (tab == "Items") alert("Top items:\n" + [...topSales].sort((a, b) => b.amt - a.amt).map(t => t.name + " - " + P(t.amt)).join("\n"));
+      else if (tab == "Inventory") alert("Inventory value: " + P(inv.reduce((a, i) => a + i.qty * i.cost, 0).toFixed(0)) + "\nLow/critical items: " + inv.filter(i => status(i) != "IN STOCK").length);
+      else if (tab == "Expenses") alert("Cost of goods: " + P(39106) + "\nOperating expenses: " + P(12480));
+      rRep();
+    }
+  </script>
+</body>
+</html>
